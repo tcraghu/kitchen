@@ -1,0 +1,32 @@
+{% extends 'index/base.html' %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1>Welcome to Manasa's Kitchen!</h1>
+  <p>Fresh home made, 100% organic. Tasty Delicious Dishes. Never miss it !</p>
+  <p><a class="btn btn-primary btn-lg" href="{% url 'menu:menu_list' %}" role="button">Our Menu</a>
+  <a class="btn btn-default btn-lg" href="{% url 'contact_us' %}" role="button">Contact US</a></p>
+</div>
+
+<div class="container">
+    <h2>Featured Items</h2>
+    <hr>
+{% for q in queryset %}
+<div class="col-sm-5 col-md-3">
+    <div class="thumbnail">
+    {% if q.img %}
+      <img src="{{ q.img.url }}" alt="..." style="width:232px;height:192px;">
+      {% endif %}
+      <div class="caption">
+        <h5><b>{{ q.item }}</b></h5>
+        <p>Price: {{ q.price }}$</p>
+        <p><a href="{{ q.get_absolute_url }}" class="btn btn-default" role="button">Details</a></p>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+<div>
+<a href="{% url 'menu:menu_list' %}">View All Items ---></a>
+</div>
+</div>
+{% endblock content %}

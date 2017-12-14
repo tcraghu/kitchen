@@ -1,0 +1,40 @@
+{% extends "index/base.html" %}
+
+{% block title %} Menu | {{ block.super }}{% endblock title %}
+{% block content %}
+
+{% include "menu/search.html" %}
+
+<div class="col-lg-3">
+<h2>Categories</h2>
+<hr>
+<div class="list-group">
+{% for q in category %}
+  <a href="{{ q.get_absolute_url }}" class="list-group-item">{{ q.cat_name }}</a>
+{% endfor %}
+</div>
+</div>
+
+<div class="col-lg-9">
+<h2 style="padding-left: 20px;">Menu Items</h2>
+<hr>
+{% for q in query_l %}
+<div class="col-sm-5 col-md-4">
+<span class="pull-right">
+    <div class="thumbnail">
+    {% if q.img %}
+      <img src="{{ q.img.url }}" alt="" style="width:232px;height:192px;">
+      {% endif %}
+      <div class="caption">
+        <h5><b>{{ q.item }}</b></h5>
+        <p>Price: {{ q.price }}$</p>
+        <p><a href="{{ q.get_absolute_url }}" class="btn btn-default" role="button">Details</a></p>
+      </div>
+    </div>
+    </span>
+  </div>
+{% endfor %}
+</div>
+{% include "menu/paginator.html" %}
+<br>
+{% endblock %}
